@@ -21,7 +21,7 @@ const olymPicSlice = createSlice({
         id: `${Date.now()}-${Math.floor(Math.random() * 1000)}`,
         ...state.medal
       };
-      state.countries.push(newMedal);
+      state.countries = [...state.countries, newMedal];
       state.medal = { country: '', gold: 0, silver: 0, bronze: 0 };
       localStorage.setItem('countries', JSON.stringify(state.countries));
     },
