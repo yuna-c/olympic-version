@@ -38,8 +38,7 @@ const olymPicSlice = createSlice({
       state.sortOption = action.payload;
     },
     loadFormStorage(state, action) {
-      const saved = localStorage.getItem('countries');
-      if (saved) state.countries = JSON.parse(saved);
+      state.countries = action.payload;
     }
   }
 });
