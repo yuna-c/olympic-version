@@ -1,4 +1,7 @@
-function Table({ sortedList, onDelete }) {
+import { useOlympicContext } from '../../context/Context';
+
+function Table() {
+  const { sortedList, onDelete } = useOlympicContext();
   return (
     <>
       {sortedList.length === 0 ? (

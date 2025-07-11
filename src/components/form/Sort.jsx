@@ -1,4 +1,8 @@
-function Sort({ sortOption, onSorted }) {
+import { useOlympicContext } from '../../context/Context';
+
+function Sort() {
+  const { sortOption, onSorted } = useOlympicContext();
+
   return (
     <>
       <label htmlFor="sort">정렬기준</label>

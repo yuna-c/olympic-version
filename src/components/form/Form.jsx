@@ -1,7 +1,10 @@
+import { useOlympicContext } from '../../context/Context';
 import Button from './Button';
 import Input from './Input';
 
-function Form({ medal, onCreate, onChange, onUpdate }) {
+function Form() {
+  const { medal, onCreate, onChange, onUpdate } = useOlympicContext();
+
   return (
     <form onSubmit={onCreate}>
       <Input id="country" name="country" label="나라" value={medal.country} onChange={onChange} />
