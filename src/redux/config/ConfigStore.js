@@ -4,6 +4,6 @@ import olympicReducer from './../slices/OlympicSlice';
 
 export const store = configureStore({
   reducer: {
-    name: olympicReducer
+    olympic: olympicReducer
   }
 });

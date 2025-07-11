@@ -1,4 +1,13 @@
-function Sort({ sortOption, onSorted }) {
+import { useDispatch, useSelector } from 'react-redux';
+import { setSortOption } from '../../redux/slices/OlympicSlice';
+
+function Sort() {
+  const dispatch = useDispatch();
+  const sortOption = useSelector((state) => state.olympic.sortOption);
+
+  const onSorted = (e) => {
+    dispatch(setSortOption(e.target.value));
+  };
   return (
     <>
       <label htmlFor="sort">정렬기준</label>

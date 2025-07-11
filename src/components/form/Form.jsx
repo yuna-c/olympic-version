@@ -1,7 +1,27 @@
 import Button from './Button';
 import Input from './Input';
+import { useDispatch, useSelector } from 'react-redux';
+import { createMedal, setMedal, updateMedal } from '../../redux/slices/OlympicSlice';
 
-function Form({ medal, onCreate, onChange, onUpdate }) {
+function Form() {
+  const dispatch = useDispatch();
+  const medal = useSelector((state) => state.olympic.medal);
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(setMedal({ [name]: name === 'country' ? String(value) : Number(value) }));
+  };
+
+  const onCreate = (e) => {
+    e.preventDefault();
+    dispatch(createMedal());
+  };
+
+  const onUpdate = (e) => {
+    e.preventDefault();
+    dispatch(updateMedal());
+  };
+
   return (
     <form onSubmit={onCreate}>
       <Input id="country" name="country" label="나라" value={medal.country} onChange={onChange} />

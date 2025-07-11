@@ -1,4 +1,31 @@
-function Table({ sortedList, onDelete }) {
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteMedal } from '../../redux/slices/OlympicSlice';
+
+function Table() {
+  const dispatch = useDispatch();
+  const countries = useSelector((state) => state.olympic.countries);
+  const sortOption = useSelector((state) => state.olympic.sortOption);
+
+  const sortedList = [...countries].sort((a, b) => {
+    if (sortOption === 'gold') {
+      if (b.gold !== a.gold) return b.gold - a.gold;
+      if (b.silver !== a.silver) return b.silver - a.silver;
+      return b.bronze - a.bronze;
+    }
+    if (sortOption === 'total') {
+      const totalA = a.gold + a.silver + a.bronze;
+      const totalB = b.gold + b.silver + b.bronze;
+      return totalB - totalA;
+    }
+    if (sortOption === 'latest') {
+      return Number(b.id.split('-')[0]) - Number(a.id.split('-')[0]);
+    }
+    return 0;
+  });
+
+  const onDelete = (id) => {
+    dispatch(deleteMedal(id));
+  };
   return (
     <>
       {sortedList.length === 0 ? (
