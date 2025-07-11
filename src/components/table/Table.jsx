@@ -24,7 +24,9 @@ function Table() {
   });
 
   const onDelete = (id) => {
-    dispatch(deleteMedal(id));
+    if (window.confirm('정말 삭제할까요?')) {
+      dispatch(deleteMedal(id));
+    }
   };
   return (
     <>

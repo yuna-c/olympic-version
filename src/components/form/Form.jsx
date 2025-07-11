@@ -6,6 +6,7 @@ import { createMedal, setMedal, updateMedal } from '../../redux/slices/OlympicSl
 function Form() {
   const dispatch = useDispatch();
   const medal = useSelector((state) => state.olympic.medal);
+  const countries = useSelector((state) => state.olympic.countries);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -14,11 +15,33 @@ function Form() {
 
   const onCreate = (e) => {
     e.preventDefault();
+
+    if (!medal.country.trim()) {
+      alert('국가명을 입력하세요.');
+      return;
+    }
+
+    if (countries.find((e) => e.country === medal.country)) {
+      alert('이미 등록된 국가입니다.');
+      return;
+    }
+
+    if (medal.gold < 0 || medal.silver < 0 || medal.bronze < 0) {
+      alert('메달 수는 0 이상이어야 합니다.');
+      return;
+    }
+
     dispatch(createMedal());
   };
 
   const onUpdate = (e) => {
     e.preventDefault();
+
+    if (!medal.country.trim()) {
+      alert('수정할 국가명을 입력하세요.');
+      return;
+    }
+
     dispatch(updateMedal());
   };
 
