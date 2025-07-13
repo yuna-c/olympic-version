@@ -2,11 +2,13 @@ import Button from './Button';
 import Input from './Input';
 import { useDispatch, useSelector } from 'react-redux';
 import { createMedal, setMedal, updateMedal } from '../../redux/slices/OlympicSlice';
+import { useEffect, useRef } from 'react';
 
 function Form() {
   const dispatch = useDispatch();
   const medal = useSelector((state) => state.olympic.medal);
   const countries = useSelector((state) => state.olympic.countries);
+  const countryRef = useRef(null);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -45,9 +47,13 @@ function Form() {
     dispatch(updateMedal());
   };
 
+  useEffect(() => {
+    countryRef.current?.focus();
+  }, []);
+
   return (
     <form onSubmit={onCreate}>
-      <Input id="country" name="country" label="나라" value={medal.country} onChange={onChange} />
+      <Input id="country" name="country" label="나라" value={medal.country} onChange={onChange} ref={countryRef} />
       <Input type="number" id="gold" name="gold" label="금메달" value={medal.gold} onChange={onChange} />
       <Input type="number" id="silver" name="silver" label="은메달" value={medal.silver} onChange={onChange} />
       <Input type="number" id="bronze" name="bronze" label="동메달" value={medal.bronze} onChange={onChange} />
