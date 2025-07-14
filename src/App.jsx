@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Form from './components/form/Form';
 import Sort from './components/form/Sort';
 import Table from './components/table/Table';
+import './App.css';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -84,11 +85,12 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div id="wrap">
+      <h1>Prop : 올림픽 매달 트래커</h1>
       <Form medal={medal} onCreate={onCreate} onChange={onChange} onUpdate={onUpdate} />
       <Sort sortOption={sortOption} onSorted={onSorted} />
       <Table sortedList={sortedList} onDelete={onDelete} />
-    </>
+    </div>
   );
 }
 
