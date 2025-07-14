@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import Form from './components/form/Form';
 import Sort from './components/form/Sort';
 import Table from './components/table/Table';
-import useOlympicStore from './zustand/olympicStore';
 import './App.css';
 
 function App() {
