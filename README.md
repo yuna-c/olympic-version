@@ -14,7 +14,7 @@ React에서는 다양한 상태관리 방식이 존재하며, 이 프로젝트�
 
 <br>
 
-- 데모 링크: [https://your-demo-link](https://your-demo-link)
+- 데모 링크: [올림픽 매달 트래커](https://olympic-version.vercel.app/)
 - 주요 기능: 입력 / 수정 / 삭제 / 정렬 / 저장(localStorage)
 
 ---
