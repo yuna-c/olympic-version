@@ -12,8 +12,10 @@ function Form() {
       <Input type="number" id="silver" name="silver" label="은메달" value={medal.silver} onChange={onChange} />
       <Input type="number" id="bronze" name="bronze" label="동메달" value={medal.bronze} onChange={onChange} />
 
-      <Button type="submit">추가하기</Button>
-      <Button onClick={onUpdate}>수정하기</Button>
+      <div className="button">
+        <Button type="submit">추가하기</Button>
+        <Button onClick={onUpdate}>수정하기</Button>
+      </div>
     </form>
   );
 }
