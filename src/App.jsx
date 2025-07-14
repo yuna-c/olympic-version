@@ -3,7 +3,8 @@ import Form from './components/form/Form';
 import Sort from './components/form/Sort';
 import Table from './components/table/Table';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadFormStorage } from './redux/slices/OlympicSlice';
+import { getLocalCountries, setLocalCountries } from './utils/localStorage';
+import { loadFormStorage } from './redux/slices/olympicSlice';
 
 function App() {
   const dispatch = useDispatch();
@@ -12,10 +13,8 @@ function App() {
   const isFirst = useRef(true);
 
   useEffect(() => {
-    const saved = localStorage.getItem('countries');
-    if (saved && saved !== 'undefined') {
-      dispatch(loadFormStorage(JSON.parse(saved)));
-    }
+    const loaded = getLocalCountries();
+    dispatch(loadFormStorage(loaded));
   }, [dispatch]);
 
   useEffect(() => {
@@ -23,7 +22,7 @@ function App() {
       isFirst.current = false;
       return;
     }
-    localStorage.setItem('countries', JSON.stringify(countries));
+    setLocalCountries(countries);
   }, [countries]);
 
   return (

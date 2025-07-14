@@ -13,7 +13,7 @@ const olymPicSlice = createSlice({
     setMedal(state, action) {
       state.medal = { ...state.medal, ...action.payload };
     },
-    createMedal(state, action) {
+    createMedal(state) {
       const created = state.countries.find((e) => e.country === state.medal.country);
       if (!state.medal.country || created) return;
 
@@ -23,16 +23,13 @@ const olymPicSlice = createSlice({
       };
       state.countries = [...state.countries, newMedal];
       state.medal = { country: '', gold: 0, silver: 0, bronze: 0 };
-      localStorage.setItem('countries', JSON.stringify(state.countries));
     },
-    updateMedal(state, action) {
+    updateMedal(state) {
       state.countries = state.countries.map((e) => (e.country === state.medal.country ? { ...e, ...state.medal } : e));
       state.medal = { country: '', gold: 0, silver: 0, bronze: 0 };
-      localStorage.setItem('countries', JSON.stringify(state.countries));
     },
     deleteMedal(state, action) {
       state.countries = state.countries.filter((e) => e.id !== action.payload);
-      localStorage.setItem('countries', JSON.stringify(state.countries));
     },
     setSortOption(state, action) {
       state.sortOption = action.payload;
