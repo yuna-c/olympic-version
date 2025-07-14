@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import './App.css';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -81,7 +82,9 @@ function App() {
   }, []);
 
   return (
-    <>
+    <div id="wrap">
+      <h1>State : 올림픽 매달 트래커</h1>
+
       <form onSubmit={onCreate}>
         <fieldset>
           <label htmlFor="country">국가</label>
@@ -100,13 +103,15 @@ function App() {
           <input type="text" id="bronze" name="bronze" placeholder="동메달" value={medal.bronze} onChange={onChange} />
         </fieldset>
 
-        <button type="submit">추가하기</button>
-        <button type="button" onClick={onUpdate}>
-          수정하기
-        </button>
+        <div className="button">
+          <button type="submit">추가하기</button>
+          <button type="button" onClick={onUpdate}>
+            수정하기
+          </button>
+        </div>
       </form>
 
-      <div>
+      <div className="sort">
         <label htmlFor="sort">정렬기준</label>
         <select name="sort" id="sort" value={sortOption} onChange={onSorted}>
           <option value="gold">금은동순</option>
@@ -158,7 +163,7 @@ function App() {
           </tbody>
         </table>
       )}
-    </>
+    </div>
   );
 }
 

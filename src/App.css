@@ -1,0 +1,159 @@
+#wrap {
+  min-width: 800px;
+  max-width: 1200px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px var(--borderColor);
+  background-color: var(--mainColor);
+
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+h1 {
+  margin: 20px 0 30px;
+  font-weight: 800;
+}
+
+table {
+  margin: 0;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 5px;
+
+  width: 100%;
+  /* table-layout: fixed; */
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+caption {
+  display: none;
+}
+
+thead {
+  border-bottom: 1px solid var(--borderColor);
+  border: 5px;
+  background-color: var(--baseColor);
+  color: var(--bgColor);
+}
+
+thead tr th {
+  padding: 8px 10px;
+  font-weight: 400;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #e9e9e961;
+}
+
+tbody tr:nth-child(even):hover {
+  background-color: #e9e9e998;
+}
+
+tbody tr:hover {
+  background-color: #e9e9e92a;
+}
+
+tbody tr td {
+  text-align: center;
+  padding: 10px 10px;
+  border-bottom: 1px solid var(--baseColor);
+}
+
+tbody tr td button {
+  padding: 5px 15px;
+  border-radius: 5px;
+  background-color: var(--pointColor);
+  color: var(--bgColor);
+}
+
+tbody tr td button:hover {
+  background-color: var(--activeColor);
+}
+
+.sort {
+  padding: 5px;
+  margin: 30px 0 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sort label {
+  display: none;
+}
+
+.sort select {
+  border: 1px solid #11101061;
+  color: #111010bd;
+  border-radius: 4px;
+  padding: 5px 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+form > fieldset {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form > fieldset > label {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+form > fieldset > input {
+  max-width: 95%;
+  padding: 5px 10px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+}
+
+form {
+  display: flex;
+}
+
+form .button > button {
+  width: 80px;
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid var(--borderColor);
+  border-radius: 5px;
+  color: var(--bgColor);
+  background-color: var(--baseColor);
+}
+
+form .button > button:hover {
+  background-color: #000000cc;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+@media (max-width: 1400px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* tablet */
+@media (max-width: 1200px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+/* mobile */
+@media (max-width: 640px) {
+}
