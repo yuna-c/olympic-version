@@ -34,17 +34,24 @@ function Form() {
     }
 
     dispatch(createMedal());
+    alert('입력 완료');
   };
 
   const onUpdate = (e) => {
     e.preventDefault();
 
-    if (!medal.country.trim()) {
+    if (!medal.country) {
       alert('수정할 국가명을 입력하세요.');
       return;
     }
 
+    if (!countries.find((e) => e.country === medal.country)) {
+      alert('등록되지 않은 국가입니다.');
+      return;
+    }
+
     dispatch(updateMedal());
+    alert('수정 완료');
   };
 
   useEffect(() => {

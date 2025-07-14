@@ -26,6 +26,7 @@ function Table() {
   const onDelete = (id) => {
     if (window.confirm('정말 삭제할까요?')) {
       dispatch(deleteMedal(id));
+      alert('삭제 완료');
     }
   };
   return (
