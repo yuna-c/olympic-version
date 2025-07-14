@@ -5,6 +5,7 @@ import Table from './components/table/Table';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLocalCountries, setLocalCountries } from './utils/localStorage';
 import { loadFormStorage } from './redux/slices/olympicSlice';
+import './App.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,11 +27,12 @@ function App() {
   }, [countries]);
 
   return (
-    <>
+    <div id="wrap">
+      <h1>Redux : 올림픽 매달 트래커</h1>
       <Form />
       <Sort />
       <Table />
-    </>
+    </div>
   );
 }
 
