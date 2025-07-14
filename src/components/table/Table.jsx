@@ -1,4 +1,32 @@
-function Table({ sortedList, onDelete }) {
+import useOlympicStore from '../../zustand/olympicStore';
+
+function Table() {
+  const { countries, sortOption, onDeleted } = useOlympicStore((state) => state);
+
+  const onDelete = (id) => {
+    if (window.confirm('정말 삭제할까요?')) {
+      onDeleted(id);
+      alert('삭제 완료');
+    }
+  };
+
+  const sortedList = [...countries].sort((a, b) => {
+    if (sortOption === 'gold') {
+      if (b.gold !== a.gold) return b.gold - a.gold;
+      if (b.sliver !== a.sliver) return b.sliver - a.sliver;
+      return b.bronze - a.bronze;
+    }
+    if (sortOption === 'total') {
+      const totalA = a.gold + a.sliver + a.bronze;
+      const totalB = b.gold + b.sliver + b.bronze;
+      return totalB - totalA;
+    }
+    if (sortOption === 'latest') {
+      return Number(b.id.split('-')[0]) - Number(a.id.split('-')[0]);
+    }
+    return 0;
+  });
+
   return (
     <>
       {sortedList.length === 0 ? (
