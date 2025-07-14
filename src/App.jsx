@@ -80,12 +80,12 @@ function App() {
   const sortedList = [...countries].sort((a, b) => {
     if (sortOption === 'gold') {
       if (b.gold !== a.gold) return b.gold - a.gold;
-      if (b.sliver !== a.sliver) return b.sliver - a.sliver;
+      if (b.silver !== a.silver) return b.silver - a.silver;
       return b.bronze - a.bronze;
     }
     if (sortOption === 'total') {
-      const totalA = a.gold + a.sliver + a.bronze;
-      const totalB = b.gold + b.sliver + b.bronze;
+      const totalA = a.gold + a.silver + a.bronze;
+      const totalB = b.gold + b.silver + b.bronze;
       return totalB - totalA;
     }
     if (sortOption === 'latest') {
