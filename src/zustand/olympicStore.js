@@ -1,59 +1,57 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-const useOlympicStore = create((set) => {
-  return {
-    countries: [],
-    medal: { country: '', gold: 0, silver: 0, bronze: 0 },
-    sortOption: 'gold',
+const useOlympicStore = create(
+  persist(
+    (set) => ({
+      countries: [],
+      medal: { country: '', gold: 0, silver: 0, bronze: 0 },
+      sortOption: 'gold',
 
-    onChanged: (payload) =>
-      set((state) => ({
-        medal: { ...state.medal, ...payload }
-      })),
+      onChanged: (payload) =>
+        set((state) => ({
+          medal: { ...state.medal, ...payload }
+        })),
 
-    onCreated: () =>
-      set((state) => {
-        const { medal, countries } = state;
-        const newMedal = {
-          id: `${Date.now()}-${Math.floor(Math.random() * 1000)}`,
-          ...medal
-        };
-        const updated = [...countries, newMedal];
-        localStorage.setItem('countries', JSON.stringify(updated));
+      onCreated: () =>
+        set((state) => {
+          const { medal, countries } = state;
+          const newMedal = {
+            id: `${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+            ...medal
+          };
+          const updated = [...countries, newMedal];
 
-        return {
-          countries: updated,
-          medal: { country: '', gold: 0, silver: 0, bronze: 0 }
-        };
-      }),
+          return {
+            countries: updated,
+            medal: { country: '', gold: 0, silver: 0, bronze: 0 }
+          };
+        }),
 
-    onUpdated: () =>
-      set((state) => {
-        const { medal, countries } = state;
-        const updated = countries.map((e) => (e.country === medal.country ? { ...e, ...medal } : e));
-        localStorage.setItem('countries', JSON.stringify(updated));
+      onUpdated: () =>
+        set((state) => {
+          const { medal, countries } = state;
+          const updated = countries.map((e) => (e.country === medal.country ? { ...e, ...medal } : e));
 
-        return {
-          countries: updated,
-          medal: { country: '', gold: 0, silver: 0, bronze: 0 }
-        };
-      }),
+          return {
+            countries: updated,
+            medal: { country: '', gold: 0, silver: 0, bronze: 0 }
+          };
+        }),
 
-    onDeleted: (id) =>
-      set((state) => {
-        const deleted = state.countries.filter((e) => e.id !== id);
-        localStorage.setItem('countries', JSON.stringify(deleted));
+      onDeleted: (id) =>
+        set((state) => {
+          const deleted = state.countries.filter((e) => e.id !== id);
+          return { countries: deleted };
+        }),
 
-        return { countries: deleted };
-      }),
-
-    onSorted: (value) => set({ sortOption: value }),
-
-    loadFromStorage: () => {
-      const saved = localStorage.getItem('countries');
-      if (saved) set({ countries: JSON.parse(saved) });
+      onSorted: (value) => set({ sortOption: value })
+    }),
+    {
+      name: 'countriesZustand', //  localStorage 키 이름
+      partialize: (state) => ({ countries: state.countries }) // 저장할 상태만 선택
     }
-  };
-});
+  )
+);
 
 export default useOlympicStore;
