@@ -18,12 +18,17 @@ export const OlympicProvider = ({ children }) => {
     e.preventDefault();
 
     if (!medal.country) {
-      alert('국가 없음');
+      alert('국가명을 입력하세요.');
       return;
     }
 
     if (countries.find((e) => e.country === medal.country)) {
-      alert('국가 중복');
+      alert('이미 등록된 국가입니다.');
+      return;
+    }
+
+    if (medal.gold < 0 || medal.silver < 0 || medal.bronze < 0) {
+      alert('메달 수는 0 이상이어야 합니다.');
       return;
     }
 
@@ -35,27 +40,40 @@ export const OlympicProvider = ({ children }) => {
     const total = [...countries, newMedal];
     setCountries(total);
     localStorage.setItem('countries', JSON.stringify(total));
-    alert('추가완료');
+    alert('입력 완료');
     setMedal({ country: '', gold: 0, silver: 0, bronze: 0 });
   };
 
   const onUpdate = (e) => {
     e.preventDefault();
 
+    if (!medal.country) {
+      alert('수정할 국가명을 입력하세요.');
+      return;
+    }
+
+    if (!countries.find((e) => e.country === medal.country)) {
+      alert('등록되지 않은 국가입니다.');
+      return;
+    }
+
     const updated = countries.map((e) => (e.country === medal.country ? { ...e, ...medal } : e));
 
     setCountries(updated);
     localStorage.setItem('countries', JSON.stringify(updated));
-    alert('수정완료');
+    alert('수정 완료');
     setMedal({ country: '', gold: 0, silver: 0, bronze: 0 });
   };
 
   const onDelete = (id) => {
     const deleted = countries.filter((e) => e.id !== id);
 
-    setCountries(deleted);
+    if (window.confirm('정말 삭제할까요?')) {
+      setCountries(deleted);
+      alert('삭제 완료');
+    }
+
     localStorage.setItem('countries', JSON.stringify(deleted));
-    alert('삭제완료');
   };
 
   const onSorted = (e) => {

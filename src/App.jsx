@@ -7,6 +7,7 @@ import './App.css';
 function App() {
   return (
     <div id="wrap">
+      <h1>Context : 올림픽 매달 트래커</h1>
       <Providers>
         <Form />
         <Sort />
